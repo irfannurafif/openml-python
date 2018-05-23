@@ -15,6 +15,7 @@
 import os
 import sys
 import sphinx_bootstrap_theme
+from sphinx_gallery.sorting import ExplicitOrder, FileNameSortKey
 import openml
 
 
@@ -41,6 +42,8 @@ extensions = [
     'sphinx.ext.coverage',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
+    'sphinx.ext.autosectionlabel',
+    'sphinx_gallery.gen_gallery',
     'numpydoc'
 ]
 
@@ -134,6 +137,7 @@ html_theme_options = {
         ('API', 'api'),
         ('User Guide', 'usage'),
         ('Progress', 'progress'),
+        ('Examples', 'examples/index'),
     ],
 
     # Render the next and previous page links in navbar. (Default: true)
@@ -330,3 +334,16 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+# prefix each section label with the name of the document it is in, in order to avoid
+# ambiguity when there are multiple same section labels in different documents.
+autosectionlabel_prefix_document = True
+backreferences_dir: False
+# Sphinx-gallery configuration.
+sphinx_gallery_conf = {
+    # path to the examples
+    'examples_dirs': '../examples',
+    # path where to save gallery generated examples
+    'gallery_dirs': 'examples',
+    #TODO: fix back/forward references for the examples.
+}
